@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProfilesController;
+use App\Http\Controllers\Admin\AdminListController;
+use App\Http\Controllers\Admin\TrendPostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
 Route::middleware([
@@ -23,6 +29,25 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('admin.profile.index');
     })->name('dashboard');
 });
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function() {
+    //Profile
+    Route::resource('profiles', ProfilesController::class);
+
+    //Admin List
+    Route::resource('admin-list', AdminListController::class);
+
+    //Category
+    Route::resource('category', CategoryController::class);
+
+    //Post
+    Route::resource('post', PostController::class);
+
+    //Trend Post
+    Route::resource('trend-post', TrendPostController::class);
+});
+
+
