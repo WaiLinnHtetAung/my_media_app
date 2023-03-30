@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminListController extends Controller
 {
@@ -14,7 +15,8 @@ class AdminListController extends Controller
      */
     public function index()
     {
-        return view('admin.admin_list.index');
+        $users = User::all();
+        return view('admin.admin_list.index', compact('users'));
     }
 
     /**
@@ -78,8 +80,25 @@ class AdminListController extends Controller
      * @param  \App\Models\AdminList  $adminList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdminList $adminList)
+    public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+
+        return back()->with(['deleteSuccess' => 'Admin is Deleted successfully']);
+    }
+
+    //admin search
+    public function adminSearch(Request $request) {
+        $users = User::orWhere('name', 'like', "%$request->searchKey%")
+                        ->orWhere('email', 'like', "%$request->searchKey%")
+                        ->orWhere('phone', 'like', "%$request->searchKey%")
+                        ->orWhere('address', 'like', "%$request->searchKey%")
+                        ->orWhere('gender', 'like', "%$request->searchKey%")
+                        ->get();
+
+        $searchKey = $request->searchKey;
+
+        return view('admin.admin_list.index', compact('users', 'searchKey'));
+
     }
 }

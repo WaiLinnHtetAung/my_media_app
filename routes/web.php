@@ -28,17 +28,18 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.profile.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [ProfilesController::class, 'index'])->name('dashboard');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function() {
     //Profile
     Route::resource('profiles', ProfilesController::class);
+    Route::get('changePasswordPage', [ProfilesController::class, 'changePasswordPage'])->name('changePasswordPage');
+    Route::post('changePassword', [ProfilesController::class, 'updatePassword'])->name('updatePassword');
 
     //Admin List
     Route::resource('admin-list', AdminListController::class);
+    Route::post('admin-search', [AdminListController::class, 'adminSearch'])->name('search');
 
     //Category
     Route::resource('category', CategoryController::class);

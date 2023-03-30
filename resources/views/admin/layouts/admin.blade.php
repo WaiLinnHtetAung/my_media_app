@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   @yield('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -60,7 +61,7 @@
 
           <li class="nav-item">
             <a href="{{route('admin.category.index')}}" class="nav-link">
-              <i class="fas fa-pizza-slice ms-5"></i>
+              <i class="fas fa-pizza-slice"></i>
               <p>
                 Category
               </p>
@@ -88,7 +89,7 @@
           <li class="nav-item">
             <form action="{{route('logout')}}" method="post">
               @csrf
-              <button type="submit" class="nav-link">
+              <button type="submit" class="nav-link bg-danger">
                 <i class="fas fa-sign-out-alt"></i>
                 <p>
                   Logout

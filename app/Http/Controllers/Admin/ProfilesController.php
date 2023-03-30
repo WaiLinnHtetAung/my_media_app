@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilesController extends Controller
 {
@@ -19,6 +20,30 @@ class ProfilesController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
 
         return view('admin.profile.index', compact('user'));
+    }
+
+    public function changePasswordPage() {
+
+        return view('admin.profile.changePassword');
+    }
+
+    public function updatePassword(Request $request) {
+
+        // return $request->all();
+
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|min:8|same:new_password',
+        ]);
+
+
+        if(Hash::check($request->old_password, User::firstWhere('id', $request->id)->password)) {
+            User::where('id', $request->id)->update(['password' => Hash::make($request->new_password)]);
+            return redirect()->route('admin.profiles.index')->with(['pwChangedSucces' => 'Password is changed successfully']);
+        } else {
+            return back()->with(['pwNotMatch' => 'Old password is not match!']);
+        }
     }
 
     /**
@@ -73,9 +98,10 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->all();
         $request->validate([
             'username' => 'required',
-            'email' => ['required' , 'email', Rule::unique('users', 'email')],
+            'email' => 'required|unique:users,email,'.$id,
         ]);
 
         User::where('id', $id)->update([
@@ -85,6 +111,7 @@ class ProfilesController extends Controller
             'address' => $request->address,
             'gender' => $request->gender,
         ]);
+
 
         return back()->with(['updateSuccess' => 'Your Profile is updated successfully']);
     }

@@ -13,6 +13,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
+
+                @if(session('pwChangedSucces'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('pwChangedSucces')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
             </div>
         </div>
         <div class="row mb-3">
@@ -33,6 +40,9 @@
             </div>
             <div class="col-md-6">
                 <input type="email" class="form-control border-0 shadow" name="email" placeholder="----@gmail.com" value="{{$user->email}}">
+                @error('email')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
         </div>
         <div class="row mb-3">
@@ -67,7 +77,7 @@
         </div>
         <div class="row mb-3">
             <div class="text-center col-md-6 offset-md-2">
-                <a href="">Change Password</a>
+                <a href="{{route('admin.changePasswordPage')}}">Change Password</a>
             </div>
         </div>
     </form>
