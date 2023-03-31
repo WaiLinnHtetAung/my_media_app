@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreCategoryRequest;
+use App\Http\Requests\Admin\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -14,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categories = Category::all();
+
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -33,9 +38,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        Category::create($request->all());
+
+        $categories = Category::all();
+
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -55,9 +64,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -67,9 +76,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        //
+        Category::findOrFail($id)->update($request->all());
+
+        $categories = Category::all();
+
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -80,6 +93,20 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+
+        $categories = Category::all();
+
+        return back()->with(['categories' => $categories, 'deleteSuccess' => 'Category is deleted successfully']);
+    }
+
+    public function categorySearch(Request $request) {
+        $categories = Category::orWhere('title', 'like', "%$request->searchKey%")
+                                ->orWhere('description', 'like', "%$request->searchKey%")
+                                ->get();
+
+        $key = $request->searchKey;
+
+        return view('admin.category.index', compact('categories', 'key'));
     }
 }

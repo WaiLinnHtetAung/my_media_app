@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     //Category
     Route::resource('category', CategoryController::class);
+    Route::post('category-search', [CategoryController::class, 'categorySearch'])->name('category.search');
 
     //Post
     Route::resource('post', PostController::class);

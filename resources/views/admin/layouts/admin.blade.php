@@ -52,7 +52,7 @@
 
           <li class="nav-item">
             <a href="{{route('admin.admin-list.index')}}" class="nav-link">
-              <i class="fas fa-list"></i>
+              <i class="fas fa-users"></i>
               <p>
                 Admin List
               </p>
@@ -61,7 +61,7 @@
 
           <li class="nav-item">
             <a href="{{route('admin.category.index')}}" class="nav-link">
-              <i class="fas fa-pizza-slice"></i>
+              <i class="fa-solid fa-table-list"></i>
               <p>
                 Category
               </p>
@@ -70,7 +70,7 @@
 
          <li class="nav-item">
             <a href="{{route('admin.post.index')}}" class="nav-link">
-            <i class="fas fa-users"></i>
+              <i class="fa-solid fa-file-pen"></i>
               <p>
                 Post
               </p>
