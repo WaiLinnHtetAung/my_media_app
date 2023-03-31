@@ -8,7 +8,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <button class="btn btn-sm btn-outline-dark">Add Category</button>
+                <button onclick="location='{{ route('admin.post.create') }}'" class="btn btn-sm btn-outline-dark">Add Category</button>
               </h3>
 
               <div class="card-tools">
@@ -35,42 +35,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Vegatable</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Seafood</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>3</td>
-                    <td>Thailand</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>USA</td>
-                    <td>11-7-2014</td>
-                    <td>
-                      <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                      <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
+
                 </tbody>
               </table>
             </div>
