@@ -49,8 +49,8 @@
                       @enderror
                     </div>
                   </div>
-                  <div class="row mt-3">
-                    <div class="col-md-2 offset-md-1">
+                  <div class="row mt-3 ">
+                    <div class="col-md-3 ms-5 ">
                       <button class="btn btn-success w-100">Save</button>
                     </div>
                   </div>

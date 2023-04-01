@@ -28,14 +28,29 @@
               <table class="table table-hover text-nowrap text-center">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Category Name</th>
-                    <th>Created Date</th>
+                    <th>No</th>
+                    <th>Post Name</th>
+                    <th>Category</th>
+                    <th>Image</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-
+                  @foreach($posts as $key=>$post)
+                    <tr>
+                      <td>{{++$key}}</td>
+                      <td>{{$post->title ?? ''}}</td>
+                      <td>{{$post->category->title ?? ''}}</td>
+                      <td><img src="{{$post->post_photo->getUrl()}}" style="width: 3rem; height: 3rem;" alt="post_img"></td>
+                      <td>
+                        <form action="{{route('admin.post.destroy', $post->id)}}" method="post" class="d-inline-block">
+                          @method('delete')
+                          @csrf
+                          <button class="btn"><span class="text-danger" style="cursor: pointer;"><i class="fa-solid fa-trash "></i></span></button>
+                        </form>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

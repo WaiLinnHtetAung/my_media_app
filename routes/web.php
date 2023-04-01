@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     //Post
     Route::resource('post', PostController::class);
+    Route::post('photo-upload', [PostController::class, 'photoUpload'])->name('photo.upload');
 
     //Trend Post
     Route::resource('trend-post', TrendPostController::class);
