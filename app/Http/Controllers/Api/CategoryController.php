@@ -88,4 +88,9 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function postByCategory(Request $request) {
+        $posts = Category::findOrFail($request->id)->posts;
+        return response()->json(['posts' => $posts]);
+    }
 }

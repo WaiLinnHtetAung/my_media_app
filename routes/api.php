@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
 //post
 Route::resource('posts', PostController::class);
+Route::post('post-search', [PostController::class, 'search']);
 
 //category
 Route::resource('categories', CategoryController::class);
+Route::post('post-by-category', [CategoryController::class, 'postByCategory']);

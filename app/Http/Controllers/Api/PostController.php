@@ -52,7 +52,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $postDetail = $post->load('media');
+        return response()->json(['post' => $postDetail]);
     }
 
     /**
@@ -87,5 +88,15 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function search(Request $request) {
+        $posts = Post::orWhere('title', 'like', "%$request->key%")
+                        ->orWhere('description', 'like', "%$request->key%")
+                        ->get();
+
+        return response()->json([
+            'posts' => $posts,
+        ]);
     }
 }
