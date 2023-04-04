@@ -27,13 +27,14 @@ class AuthController extends Controller
         if(isset($user)) {
             if(Hash::check($request->password, $user->password)) {
                 return response()->json([
-                    'user' => $user->name,
+                    'user' => $user,
                     'token' => $user->createToken(time())->plainTextToken
                 ]);
             }
         } else {
             return response()->json([
-                'status' => 'error',
+                'user' => null,
+                'token' => null,
             ]);
         }
     }
