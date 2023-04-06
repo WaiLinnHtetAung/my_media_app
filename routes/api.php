@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ActionLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,7 @@ Route::post('post-search', [PostController::class, 'search']);
 //category
 Route::resource('categories', CategoryController::class);
 Route::post('post-by-category', [CategoryController::class, 'postByCategory']);
+
+//action log
+Route::resource('action-log', ActionLogController::class);
+// Route::post('actionLog', [ActionLogController::class, 'store']);
